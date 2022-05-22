@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="{{ asset('assets/img/fav.png') }}" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -25,11 +25,13 @@
   <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
   @stack('css')
+
 </head>
 
 <body>
@@ -40,7 +42,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">Company Name</span>
+        <span class="d-none d-lg-block">Kagel Klock</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -265,16 +267,6 @@
 
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>@yield('page-title','')</h1>
-      {{-- <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav> --}}
-    </div><!-- End Page Title -->
-
     @yield('content')
 
   </main><!-- End #main -->
@@ -303,6 +295,48 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
+
+  {{--Sweet Alert--}}
+  <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+
+  <script>
+    function submitForm(formId) {
+      document.getElementById(formId).submit();
+    }
+  </script>
+
+  <script>
+         function deleteItem(form,row) {
+          swal({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!',
+              cancelButtonText: 'No, cancel!',
+              confirmButtonClass: 'btn btn-success',
+              cancelButtonClass: 'btn btn-danger',
+              buttonsStyling: false,
+              reverseButtons: true
+          }).then((result) => {
+              if (result.value) {
+                  event.preventDefault();
+                  document.getElementById(form+'-'+row).submit();
+              } else if (
+                  // Read more about handling dismissals
+              result.dismiss === swal.DismissReason.cancel
+              ) {
+                  swal(
+                      'Cancelled',
+                      'Your data is safe :)',
+                      'error'
+                  )
+              }
+          })
+        }
+    </script>
 
    @stack('js')
 

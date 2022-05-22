@@ -12,6 +12,10 @@
   scroll-behavior: smooth;
 }
 
+.height-60 {
+  min-height: 60vh;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
@@ -594,6 +598,7 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-nav .nav-item {
   margin-bottom: 5px;
 }
+
 .sidebar-nav .nav-heading {
   font-size: 11px;
   text-transform: uppercase;
@@ -664,6 +669,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 .sidebar-nav .nav-content a.active i {
   background-color: #4154f1;
+}
+
+.active-nav {
+  background: chartreuse;
 }
 
 /*--------------------------------------------------------------
@@ -1061,6 +1070,21 @@ h1, h2, h3, h4, h5, h6 {
   .error-404 img {
     max-width: 50%;
   }
+}
+
+/*
+  ## custom created
+*/
+
+.left-side{
+  text-align: left;
+}
+.right-side{
+  text-align: right;
+}
+
+.label-text{
+  padding-bottom: 8px;
 }
 
 /*--------------------------------------------------------------
