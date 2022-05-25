@@ -100,7 +100,7 @@
               <div class="card recent-sales">
 
                 <div class="card-body">
-                  <h5 class="card-title">Today Reers Users</h5>
+                  <h5 class="card-title">Today Registered Users</h5>
 
                   <table class="table table-borderless datatable">
                     <thead>
