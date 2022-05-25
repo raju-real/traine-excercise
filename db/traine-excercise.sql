@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 22, 2022 at 05:10 PM
+-- Generation Time: May 25, 2022 at 05:50 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -81,7 +81,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2022_05_21_154728_create_languages_table', 2),
 (5, '2022_05_22_134910_create_trainers_table', 3),
-(6, '2022_05_22_135110_create_trainer_tutorials_table', 3);
+(8, '2022_05_22_135110_create_trainer_tutorials_table', 4);
 
 -- --------------------------------------------------------
 
@@ -111,6 +111,13 @@ CREATE TABLE `trainers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `trainers`
+--
+
+INSERT INTO `trainers` (`id`, `name`, `email`, `mobile`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'Daniel Dostie', 'daniel@mail.com', '+৮৮০৬৫৭৭৮০৫', 'assets/images/1653499710download (1).jpg', '2022-05-25 11:28:30', '2022-05-25 11:28:30');
+
 -- --------------------------------------------------------
 
 --
@@ -120,10 +127,20 @@ CREATE TABLE `trainers` (
 CREATE TABLE `trainer_tutorials` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `trainer_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
   `file_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `trainer_tutorials`
+--
+
+INSERT INTO `trainer_tutorials` (`id`, `trainer_id`, `language_id`, `file_name`, `created_at`, `updated_at`) VALUES
+(1, 1, 3, 'assets/audios/1653499710_3.mp3', '2022-05-25 11:28:30', '2022-05-25 11:28:30'),
+(2, 1, 2, 'assets/audios/1653499710_2.mp3', '2022-05-25 11:28:30', '2022-05-25 11:28:30'),
+(3, 1, 4, 'assets/audios/1653499710_4.mp3', '2022-05-25 11:28:30', '2022-05-25 11:28:30');
 
 -- --------------------------------------------------------
 
@@ -225,19 +242,19 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `trainers`
 --
 ALTER TABLE `trainers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `trainer_tutorials`
 --
 ALTER TABLE `trainer_tutorials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
