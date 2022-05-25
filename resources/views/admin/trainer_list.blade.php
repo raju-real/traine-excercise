@@ -46,7 +46,7 @@
                 <th scope="row">{{ $loop->index + 1 }}</th>
                 <td>
                   @if($value->image != null && file_exists($value->image))
-                    <img src="" class="img-responsive">
+                    <img src="{{ asset($value->image) }}" class="img-responsive" style="height: 50px;width: 50px;border-radius: 50px;">
                   @else 
                   @endif  
                 </td>
