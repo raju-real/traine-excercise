@@ -16,6 +16,7 @@ class CreateTrainerTutorialsTable extends Migration
         Schema::create('trainer_tutorials', function (Blueprint $table) {
             $table->id();
             $table->integer('trainer_id');
+            $table->integer('language_id');
             $table->string('file_name');
             $table->timestamps();
         });
