@@ -37,6 +37,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Mobile</th>
+                <th scope="col">Files</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -54,7 +55,15 @@
                 <td>{{ $value->email ?? '' }}</td>
                 <td>{{ $value->mobile ?? '' }}</td>
                 <td>
-                  <a href=""></a>
+                  <a href="" class="btn btn-primary btn-sm">Files</a>
+                </td>
+                <td>
+                  <a href="{{ route('admin.coach.show', $value->id) }}" class="btn btn-info">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                  <a href="{{ route('admin.coach.edit', $value->id) }}" class="btn btn-success">
+                    <i class="fa fa-edit"></i>
+                  </a>
 
                   <button type="button" class="btn btn-danger" onclick="deleteItem('delete-trainer',{{ $value->id }})">
                     <i class="fa fa-trash"></i>

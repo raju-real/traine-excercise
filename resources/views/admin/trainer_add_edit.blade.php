@@ -10,7 +10,7 @@
 		@include('layouts.alert')
 		
 		<div class="col-lg-6">
-			<h1>Coach</h1>
+			<h1>{{ $title ?? 'Coach' }}</h1>
 		</div>
 		<div class="col-lg-6 right-side">
           
@@ -27,6 +27,9 @@
           <br>
           <form action="{{ $route }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @isset($data)
+              @method('PUT')
+            @endisset
             <div class="row">
               <div class="form-group col-lg-4">
                 <label class="label-text">Name</label>
@@ -58,24 +61,50 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <select name="languages[]" class="form-control col-md-4">
-                          <option value="">Select Language</option>
-                          @foreach($languages as $language)
-                            <option value="{{ $language->id }}">{{ $language->name }}</option>
-                          @endforeach
-                        </select>
-                      </td>
-                      <td>
-                        <input type="file" name="files[]" class="form-control col-md-4" >
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger btn-sm mt-1 col-md-4" onclick="deleteRow(this)">
-                            <i class="fa fa-trash"></i>
-                          </button>
-                      </td>
-                    </tr>
+                    @if(isset($data))
+                      @foreach($data->tutorials as $tutorial)
+                      <tr>
+                        <td>
+                          <select name="languages[]" class="form-control col-md-4">
+                            <option value="{{ $tutorial->language_id }}">
+                              {{ $tutorial->language->name }}
+                            </option>
+                            @foreach($languages as $language)
+                              <option value="{{ $language->id }}">{{ $language->name }}</option>
+                            @endforeach
+                          </select>
+                        </td>
+                        <td>
+                          <input type="hidden" name="new_file[]" value="">
+                          <input type="file" id="{{ $tutorial->id }}" name="files[{{ $tutorial->id }}][]" value="{{ $tutorial->id }}" class="form-control col-md-4">
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-danger btn-sm mt-1 col-md-4" onclick="deleteRow(this)">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                      </tr>
+                      @endforeach
+                    @else
+                      <tr>
+                        <td>
+                          <select name="languages[]" class="form-control col-md-4">
+                            <option value="">Select Language</option>
+                            @foreach($languages as $language)
+                              <option value="{{ $language->id }}">{{ $language->name }}</option>
+                            @endforeach
+                          </select>
+                        </td>
+                        <td>
+                          <input type="file" name="files[]" class="form-control col-md-4">
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-danger btn-sm mt-1 col-md-4" onclick="deleteRow(this)">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                      </tr>
+                    @endif
                   </tbody>
                 </table>
                 <button id="classAddBtn" type="button" class="btn btn-primary btn-sm col-md-2">
