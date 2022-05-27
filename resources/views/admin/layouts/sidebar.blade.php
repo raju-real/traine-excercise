@@ -14,7 +14,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('admin.coach.index') }}" style="background: {{ $segment == 'admin/coach' ? 'chartreuse' : '' }}">
+      <a class="nav-link" href="{{ route('admin.coach.index') }}" style="background: {{ Request::is('admin/coach') ? 'chartreuse' : '' }}">
         <i class="fa fa-users"></i>
         <span>Coach</span>
       </a>

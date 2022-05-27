@@ -21,6 +21,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         $languages = App\Language::orderBy('name','asc')->get();
         return view('admin.trainer_file_div', compact('languages'));
     })->name('coach-file-div');
+    Route::get('coach-files/{id}','TrainerController@coachFiles')->name('coach-files');
 });
 
 Route::get('admin-logout', function() {

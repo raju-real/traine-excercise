@@ -67,7 +67,7 @@ class TrainerController extends Controller
         }
         $coach->save();
         
-        if( (isset($request->languages) AND sizeof($request->files) > 0) && (count($request->languages) == count($request->file('files')))){
+        if( (isset($request->languages) AND !empty($request->file('files'))) && (count($request->languages) == count($request->file('files')))){
             foreach($request->file('files') as $key=>$file){
                 $request->file('files')[$key];
                 $name = Str::slug($request->languages[$key]);
@@ -79,7 +79,8 @@ class TrainerController extends Controller
                 $user_document = new TrainerTutorial();
                 $user_document->trainer_id = $coach->id;
                 $user_document->language_id = $request->languages[$key];
-                $user_document->file_name = 'assets/audios/'.$uniqueFileName;
+                $user_document->file_name = $request->file_name[$key] ?? 'File Title';
+                $user_document->file_path = 'assets/audios/'.$uniqueFileName;
                 $user_document->save();
             }
         } 
@@ -97,7 +98,8 @@ class TrainerController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Trainer::with('tutorials')->findOrFail($id);
+        return view('admin.trainer_details', compact('data'));
     }
 
     /**
@@ -124,14 +126,7 @@ class TrainerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        foreach($request->languages as $key=> $language) {
-            //return $language;
-            if(isset($request->file('files')[$language])) {
-                dd($request->file('files')[$language]);
-            }
-            
-        }
-        return $request;
+        //return $request;
         $this->validate($request,[
             'name' => 'required',
             'mobile' => 'required',
@@ -151,33 +146,50 @@ class TrainerController extends Controller
             $name = time().$image->getClientOriginalName();
             $image_resize = Image::make($image->getRealPath());              
             //$image_resize->resize(987.75, 215.5);
-            $image_resize->save('images/' .$name);
-            $imageName = 'images/'.$name;
+            $image_resize->save('assets/images/' .$name);
+            $imageName = 'assets/images/'.$name;
             $coach->image = $imageName;
             
         } else{
                 $imageName = $coach->image;
         }
         $coach->save();
+
+
         
-        if( (isset($request->languages) AND sizeof($request->files) > 0) && (count($request->languages) == count($request->file('files')))){
+        if( (isset($request->languages) AND !empty($request->file('files')))){
             foreach($request->languages as $key=>$language){
-                $file = $request->file('files')[$language];
-                $name = Str::slug($request->languages[$key]);
-                $uniqueFileName = time().'_' .$name. '.'.$file->getClientOriginalExtension();
-                if (!file_exists('assets/audios/')) {
-                    mkdir('assets/audios/', 0755, true);
-                }
-                $file->move('assets/audios/',$uniqueFileName);
-                $user_document = new TrainerTutorial();
-                $user_document->trainer_id = $coach->id;
-                $user_document->language_id = $request->languages[$key];
-                $user_document->file_name = 'assets/audios/'.$uniqueFileName;
-                $user_document->save();
+                //return $language;
+                if(array_key_exists($key, $request->file('files'))){
+                    $file = $request->file('files')[$key];
+                    $name = Str::slug($request->languages[$key]);
+                    $uniqueFileName = time().'_' .$name. '.'.$file->getClientOriginalExtension();
+                    if (!file_exists('assets/audios/')) {
+                        mkdir('assets/audios/', 0755, true);
+                    }
+                    $file->move('assets/audios/',$uniqueFileName);
+                    if(TrainerTutorial::where('trainer_id',$coach->id)->where('language_id',$language)->exists()) {
+                        $user_document = TrainerTutorial::where('trainer_id',$coach->id)->where('language_id', $language)->first();
+                    } else {
+                        $user_document = new TrainerTutorial();
+                    }
+                    $user_document->trainer_id = $coach->id;
+                    $user_document->language_id = $request->languages[$key];
+                    $user_document->file_name = $request->file_name[$key];
+                    $user_document->file_path = 'assets/audios/'.$uniqueFileName;
+                    $user_document->save();
+                } 
             }
         } 
 
+        return redirect()->route('admin.coach.index')->with(setAlert('info','Coach Information Updated Successfully'));
+
         
+    }
+
+    public function coachFiles($id) {
+        $files = TrainerTutorial::where('trainer_id', $id)->get();
+        return view('admin.trainer_files', compact('files'));
     }
 
     /**

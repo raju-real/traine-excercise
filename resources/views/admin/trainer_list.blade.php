@@ -49,13 +49,14 @@
                   @if($value->image != null && file_exists($value->image))
                     <img src="{{ asset($value->image) }}" class="img-responsive" style="height: 50px;width: 50px;border-radius: 50px;">
                   @else 
+                    <img src="{{ asset('assets/img/avator.jpg') }}" class="img-responsive" style="height: 50px;width: 50px;border-radius: 50px;">
                   @endif  
                 </td>
                 <td>{{ $value->name ?? '' }}</td>
                 <td>{{ $value->email ?? '' }}</td>
                 <td>{{ $value->mobile ?? '' }}</td>
                 <td>
-                  <a href="" class="btn btn-primary btn-sm">Files</a>
+                  <a href="{{ route('admin.coach-files', $value->id) }}" class="btn btn-primary btn-sm">Files</a>
                 </td>
                 <td>
                   <a href="{{ route('admin.coach.show', $value->id) }}" class="btn btn-info">

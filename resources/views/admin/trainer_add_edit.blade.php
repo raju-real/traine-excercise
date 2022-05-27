@@ -56,6 +56,7 @@
                   <thead>
                     <tr>
                       <th>Language</th>
+                      <th>File Title</th>
                       <th>File</th>
                       <th>Action</th>
                     </tr>
@@ -75,8 +76,10 @@
                           </select>
                         </td>
                         <td>
-                          <input type="hidden" name="new_file[]" value="">
-                          <input type="file" id="{{ $tutorial->id }}" name="files[{{ $tutorial->id }}][]" value="{{ $tutorial->id }}" class="form-control col-md-4">
+                          <input type="text" name="file_name[]" value="{{ $tutorial->file_name }}" class="form-control" placeholder="File Title">
+                        </td>
+                        <td>
+                          <input type="file"  value="{{ $tutorial->language_id }}" name="files[]" class="form-control col-md-4">
                         </td>
                         <td>
                           <button type="button" class="btn btn-danger btn-sm mt-1 col-md-4" onclick="deleteRow(this)">
@@ -94,6 +97,9 @@
                               <option value="{{ $language->id }}">{{ $language->name }}</option>
                             @endforeach
                           </select>
+                        </td>
+                        <td>
+                          <input type="text" name="file_name[]" value="" class="form-control" placeholder="File Title">
                         </td>
                         <td>
                           <input type="file" name="files[]" class="form-control col-md-4">

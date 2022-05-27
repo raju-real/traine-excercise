@@ -18,6 +18,7 @@ class CreateTrainerTutorialsTable extends Migration
             $table->integer('trainer_id');
             $table->integer('language_id');
             $table->string('file_name');
+            $table->string('file_path');
             $table->timestamps();
         });
     }
