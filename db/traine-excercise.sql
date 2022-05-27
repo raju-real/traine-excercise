@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 25, 2022 at 05:50 PM
+-- Generation Time: May 27, 2022 at 05:08 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -81,7 +81,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2022_05_21_154728_create_languages_table', 2),
 (5, '2022_05_22_134910_create_trainers_table', 3),
-(8, '2022_05_22_135110_create_trainer_tutorials_table', 4);
+(9, '2022_05_22_135110_create_trainer_tutorials_table', 4);
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,8 @@ CREATE TABLE `trainers` (
 --
 
 INSERT INTO `trainers` (`id`, `name`, `email`, `mobile`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'Daniel Dostie', 'daniel@mail.com', '+৮৮০৬৫৭৭৮০৫', 'assets/images/1653499710download (1).jpg', '2022-05-25 11:28:30', '2022-05-25 11:28:30');
+(1, 'Daniel Dostie', 'daniel@mail.com', '+৮৮০৬৫৭৭৮০৫', 'assets/images/1653499710download (1).jpg', '2022-05-25 11:28:30', '2022-05-25 11:28:30'),
+(2, 'Loyal Verreau', 'loyal@mail.com', '+৮৮০৬৫৭৭৮০৫', 'assets/images/1653669748download (2).png', '2022-05-27 02:32:54', '2022-05-27 10:42:28');
 
 -- --------------------------------------------------------
 
@@ -129,6 +130,7 @@ CREATE TABLE `trainer_tutorials` (
   `trainer_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `file_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -137,10 +139,10 @@ CREATE TABLE `trainer_tutorials` (
 -- Dumping data for table `trainer_tutorials`
 --
 
-INSERT INTO `trainer_tutorials` (`id`, `trainer_id`, `language_id`, `file_name`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, 'assets/audios/1653499710_3.mp3', '2022-05-25 11:28:30', '2022-05-25 11:28:30'),
-(2, 1, 2, 'assets/audios/1653499710_2.mp3', '2022-05-25 11:28:30', '2022-05-25 11:28:30'),
-(3, 1, 4, 'assets/audios/1653499710_4.mp3', '2022-05-25 11:28:30', '2022-05-25 11:28:30');
+INSERT INTO `trainer_tutorials` (`id`, `trainer_id`, `language_id`, `file_name`, `file_path`, `created_at`, `updated_at`) VALUES
+(1, 2, 3, 'Part one', 'assets/audios/1653671114_3.mp3', '2022-05-27 02:32:54', '2022-05-27 11:05:14'),
+(2, 2, 2, 'Part two', 'assets/audios/1653668808_4.mp3', '2022-05-27 02:32:54', '2022-05-27 10:26:48'),
+(3, 2, 5, 'Part Three', 'assets/audios/1653671189_5.mp3', '2022-05-27 11:06:29', '2022-05-27 11:06:29');
 
 -- --------------------------------------------------------
 
@@ -242,13 +244,13 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `trainers`
 --
 ALTER TABLE `trainers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `trainer_tutorials`
