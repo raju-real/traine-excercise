@@ -200,6 +200,7 @@ class TrainerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Trainer::findOrFail($id)->delete();
+        return redirect()->route('admin.coach.index')->with(setAlert('danger','Coach Deleted Successfully'));
     }
 }

@@ -27,11 +27,11 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="fa fa-users"></i>
+                      <i class="fa fa-user"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>10</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                      <h6>{{ App\Subscriber::count() }}</h6>
+                      {{-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
 
                     </div>
                   </div>
@@ -49,10 +49,10 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="fa fa-user"></i>
+                      <i class="fa fa-users"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>15</h6>
+                      <h6>{{ App\User::count() }}</h6>
                     </div>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
                       <i class="fa fa-users"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>18</h6>
+                      <h6>{{ App\Trainer::count() }}</h6>
                     </div>
                   </div>
                 </div>
@@ -88,7 +88,7 @@
                       <i class="fa fa-language"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>5</h6>
+                      <h6>{{ App\Language::count() }}</h6>
                     </div>
                   </div>
                 </div>
@@ -112,7 +112,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach(App\User::all() as $user)
+                      @foreach($todayRegisterUsers as $user)
                       <tr>
                         <th scope="row"><a href="#">{{ $loop->index + 1 }}</a></th>
                         <td>{{ $user->name ?? '' }}</td>

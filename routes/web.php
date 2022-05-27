@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::post('subscribe','HomeController@subscribe')->name('subscribe');
 
 Route::get('admin', 'Auth\LoginController@showAdminLoginForm')->name('admin');
 
@@ -22,6 +21,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         return view('admin.trainer_file_div', compact('languages'));
     })->name('coach-file-div');
     Route::get('coach-files/{id}','TrainerController@coachFiles')->name('coach-files');
+    Route::get('users','DashboardController@users')->name('users');
+    Route::get('subscribers','DashboardController@subscribers')->name('subscribers');
+    Route::delete('delete-subscriber/{id}','DashboardController@deleteSubscriber')
+        ->name('delete-subscriber');
 });
 
 Route::get('admin-logout', function() {

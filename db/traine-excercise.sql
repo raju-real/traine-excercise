@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 27, 2022 at 05:08 PM
+-- Generation Time: May 27, 2022 at 07:52 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -81,7 +81,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2022_05_21_154728_create_languages_table', 2),
 (5, '2022_05_22_134910_create_trainers_table', 3),
-(9, '2022_05_22_135110_create_trainer_tutorials_table', 4);
+(9, '2022_05_22_135110_create_trainer_tutorials_table', 4),
+(10, '2022_05_27_174226_create_subscribers_table', 5);
 
 -- --------------------------------------------------------
 
@@ -94,6 +95,35 @@ CREATE TABLE `password_resets` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscribers`
+--
+
+CREATE TABLE `subscribers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `email`, `created_at`, `updated_at`) VALUES
+(1, 'subscriber1@gmail.com', '2022-05-27 11:52:53', '2022-05-27 11:52:53'),
+(5, 'subscriber2@gmail.com', '2022-05-27 12:24:09', '2022-05-27 12:24:09'),
+(6, 'subscriber3@gmail.com', '2022-05-27 12:24:15', '2022-05-27 12:24:15'),
+(7, 'subscriber4@gmail.com', '2022-05-27 12:24:19', '2022-05-27 12:24:19'),
+(8, 'nurse2@gmail.com', '2022-05-27 13:30:07', '2022-05-27 13:30:07'),
+(9, 'caregiver1@gmail.com', '2022-05-27 13:32:21', '2022-05-27 13:32:21'),
+(10, 'BrendaJMatthews@armyspy.com', '2022-05-27 13:40:29', '2022-05-27 13:40:29'),
+(13, 'nurse1@gmail.com', '2022-05-27 13:46:56', '2022-05-27 13:46:56'),
+(14, 'sfdfdf@mail.com', '2022-05-27 13:50:38', '2022-05-27 13:50:38'),
+(15, 'subscriber5@gmail.com', '2022-05-27 13:51:46', '2022-05-27 13:51:46');
 
 -- --------------------------------------------------------
 
@@ -174,7 +204,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `role`, `name`, `email`, `mobile`, `gender`, `age`, `image`, `email_verified_at`, `password`, `online_status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'Super Admin', 'admin@admin.com', '123456789', NULL, NULL, NULL, NULL, '$2y$10$lXvXg4gHx0/7db27rybskO4Go1A3hC7HP4URb1rU83PbSNurwk1Ee', 2, NULL, NULL, NULL),
 (2, 'user', 'User One', 'urser1@gmail.com', '01889967514', 'Male', '29', 'assets/images/1653140563photo_2022-03-15_16-38-04.jpg', NULL, '$2y$10$6i2gzIIIB5SeAvwY.8wGs.4ej2stlVKJEyVRQIugfIuUy2cOPkzHK', 1, NULL, NULL, '2022-05-21 08:05:02'),
-(3, 'user', 'User Two', 'user2@gmail.com', '245678912', NULL, NULL, NULL, NULL, '$2y$10$l.kkTgCKftTapzMAH05di.WD63blBLiFSsCVlBc0YRR/1B3KrW3hG', 2, NULL, '2022-05-21 07:12:47', '2022-05-21 07:12:47');
+(3, 'user', 'User Two', 'user2@gmail.com', '245678912', NULL, NULL, NULL, NULL, '$2y$10$l.kkTgCKftTapzMAH05di.WD63blBLiFSsCVlBc0YRR/1B3KrW3hG', 2, NULL, '2022-05-21 07:12:47', '2022-05-21 07:12:47'),
+(4, 'user', 'User Three', 'user3@gmail.com', '561815619', NULL, NULL, NULL, NULL, '$2y$10$APxZXERvT7TvcERq6rHYcO.p9T5.fK2U9hr.BCA1kXiaVECCGPhQi', 1, NULL, '2022-05-27 12:00:38', '2022-05-27 12:36:05');
 
 --
 -- Indexes for dumped tables
@@ -203,6 +234,13 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `subscribers`
+--
+ALTER TABLE `subscribers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `subscribers_email_unique` (`email`);
 
 --
 -- Indexes for table `trainers`
@@ -244,7 +282,13 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `subscribers`
+--
+ALTER TABLE `subscribers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `trainers`
@@ -262,7 +306,7 @@ ALTER TABLE `trainer_tutorials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

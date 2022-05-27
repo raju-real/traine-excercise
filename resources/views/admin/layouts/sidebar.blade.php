@@ -25,5 +25,17 @@
         <span>Language</span>
       </a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('admin.users') }}" style="background: {{ Request::is('admin/users') ? 'chartreuse' : '' }}"> 
+        <i class="fa fa-users"></i>
+        <span>Users</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('admin.subscribers') }}" style="background: {{ Request::is('admin/subscribers') ? 'chartreuse' : '' }}"> 
+        <i class="fa fa-user"></i>
+        <span>Subscribers</span>
+      </a>
+    </li>
   </ul>
 @endif

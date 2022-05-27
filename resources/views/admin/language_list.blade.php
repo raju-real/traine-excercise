@@ -10,7 +10,10 @@
 		@include('layouts.alert')
 		
 		<div class="col-lg-6">
-			<h1>Language</h1>
+			<h1>
+        Language
+        <span class="badge rounded-pill bg-info text-white">{{ $results->count() }}</span>
+      </h1>
 		</div>
 		<div class="col-lg-6 right-side">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#languageAdd">
